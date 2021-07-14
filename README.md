@@ -1,6 +1,3 @@
-# hwem_kanban
+NUKE OF READ ME. FROM THE FIX READ ME BRANCH. 
 
-_____ this line added from github GUI _____
-
-we need to add some code below from the remote dev.
 
