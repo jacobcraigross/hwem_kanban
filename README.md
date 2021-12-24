@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+notes and useful hints. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+you can basically insert JS anywhere in a compo via the {} syntax. 
 
-## Available Scripts
+instead of this...
+{showComments ? (<div>PLACEHOLDER</div>) : ('NO COMMENTS')}
 
-In the project directory, you can run:
+we can refactor to this...
+{showComments && (<div>PLACEHOLDER</div>)}
 
-### `yarn start`
+"if showComments is truthy, render that div"
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+--------------------------------------------------------------------------
+basics lesson code... 
 
-### `yarn test`
+function App() {
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    
+    const title = "Chicken fried steak fucking sucked at this dump."
+    const body = "Yeah we came and it was pure shit. 0/10 stars and the outhouse smelled like shit. Also shit was smeared on the wall. We wont be going back."
+    const comments = [
+        {id: 1, text: "lol blow it out your ass puto!!!"},
+        {id: 2, text: "GOOD FUCKING STEAK"},
+        {id: 3, text: "6/10.... not horrible, not great."}
+    ];
+    
 
-### `yarn build`
+    const loading = false; // use case: like fetching data from backend. 
+    // if (loading === true) return <h1>Loading...please wait</h1>
+    // refactor shorter
+    if (loading) return <h1>Loading...</h1>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    const showComments = true; // toggle this to show comments. 
+    const commentBlock = ( // cleaner up outta the way.
+        <div className="comments">
+            <h3>comments ({comments.length})</h3>
+                {/* map() takes a function and returns JSX () NOT {} in this case. */}
+                {/* dont forget to use in index as the key! warnings otherwise. */}
+            <ul> 
+                {comments.map((comment, index) => (
+                    <li key={index}>{comment.text}</li>
+                ))}
+            </ul>
+        </div>
+    )
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+    
+    return (
+        <div className="container">
+            <h1>{title}</h1>
+            <p>{body}</p>
+            {showComments && commentBlock}
+        </div>
+    )
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+export default App;
+--------------------------------------------------------------------------------
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
